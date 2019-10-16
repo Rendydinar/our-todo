@@ -22,8 +22,7 @@ const db = require('./config/db-config').MongoURI;
 // Connect ot MongoDB 
 mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
    .then(() => {
-   		console.log('MongoDB Connected');
-   		
+   		console.log('MongoDB Connected');   		
    		// Routes
 		app.use(require('./routes/our-todo'));
    })
@@ -31,7 +30,7 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // Set Public Folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
-
+	
 // BodyParser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -48,20 +47,8 @@ app.use(helmet());
 // CORS Protection 
 app.use(cors());
 
-// Connect flash
-// app.use(flash());
-
 // parse cookies
 // we need this because "cookie" is true in csrfProtection
 app.use(cookieParser());
-
-// Global Vars To Flash
-// app.use((req, res, next) => {
-// 	res.locals.success_msg = req.flash('success_msg');
-// 	res.locals.error_msg = req.flash('error_msg');
-// 	res.locals.error = req.flash('error');
-
-// 	next();
-// });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
